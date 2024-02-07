@@ -18,10 +18,15 @@ int main(void)
     int age = 18;
     double height = 6.545234;
 
-    string fname2 = "Alpho";
+    string fname2 = "Alphonso";
     string lname2 = "Bent";
     int age2 = 24;
     double height2 = 5.59;
+
+    string fname3 = "Jim";
+    string lname3 = "Johnson";
+    int age3 = 33;
+    double height3 = 6.02;
 
     //cout << showpoint << height << endl;
     cout << setw(15) << left << fnamedeclare;
@@ -38,7 +43,15 @@ int main(void)
     cout << setw(15) << left << lname2;
     cout << setw(5) << age2;
     cout << setw(5) << setprecision(3) << height2 << endl;
-     cout << setw(10)<< "" << "-------Math Operations-------" << endl;;
+
+    cout << setw(15) << left << fname3;
+    cout << setw(15) << left << lname3;
+    cout << setw(5) << age3;
+    cout << setw(5) << setprecision(3) << height3 << endl;
+
+    cout << "\n" << endl;
+
+     cout << setw(10)<< "" << "-------Math Operations-------" << endl;
 
     cout << "2 to the 3rd power = " << pow(2,3) << endl;
     cout << "sin(pi) = " << sin(M_PI) << endl;
