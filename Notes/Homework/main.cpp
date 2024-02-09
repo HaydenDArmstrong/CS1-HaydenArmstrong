@@ -72,7 +72,7 @@ int main()
     // double cast result of two integers undergoing a double operation.
     // the integers are calculated as doubles, the result is 2.5
 
-    int intcomparison = 2; 
+    int intcomparison = 5/2; 
     // integer for terminal comparison. 
     // The integer when the precision is set to two decimal points will still remain 2, not 2.0
 
