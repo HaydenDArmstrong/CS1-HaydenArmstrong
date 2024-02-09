@@ -3,9 +3,9 @@ Ongoing Notes for C++ fundamentals Homework
 Hayden Armstrong
 */
 
-
 #include <iostream>
 #include <iomanip>
+
 int main()
 {
     //-----increment and decrement operators----
@@ -60,6 +60,10 @@ int main()
     count3 /= 2;
     std::cout << "int count2 is 3 / 2, which results in: " << count3 << std::endl;
 
+    std::cout << "\n";
+
+    //----Data Conversion and casting----
+
     double castednarrow = static_cast<double>(5/2); 
     // double cast result of two integers. 
     // because the integers are calculated beforehand, the result is 2.0, with the .5 truncated
@@ -71,10 +75,6 @@ int main()
     int intcomparison = 2; 
     // integer for terminal comparison. 
     // The integer when the precision is set to two decimal points will still remain 2, not 2.0
-
-    std::cout << "\n";
-
-    //----Data Conversion and casting----
 
     std::cout << "result of casted double, with the operation happening as a integer: " << 
     std::fixed << std::setprecision(2) << castednarrow << std::endl;
