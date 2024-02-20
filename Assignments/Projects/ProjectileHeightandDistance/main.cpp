@@ -83,6 +83,7 @@ int main(void)
     else
     {
         cout << "Travelled Distance is less than target by " << targetDistance - actualDistance << " meters. Within range" << endl;
+        cout << "\n" << endl;
     }
     
     
