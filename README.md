@@ -20,7 +20,7 @@ ________________________________________________________________________________
 | Description: | "ascii Lab" |
 | Due Date: | 2/11/24 |
 | Status: | complete |
-| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/Assignments/labs/ascii1|
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/ascii1|
 | Notes: | Function Correctly|
 
 ## Assignment #2
@@ -30,7 +30,7 @@ ________________________________________________________________________________
 | Description: | "library functions Lab" |
 | Due Date: | 2/18/24 |
 | Status: | complete |
-| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/Assignments/labs/library|
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/library|
 | Notes: | All functions execute correct outputs.|
 
 ## Assignment #3
@@ -40,5 +40,5 @@ ________________________________________________________________________________
 | Description: | "Projectile Height and Distance Project" |
 | Due Date: | 2/21/24 |
 | Status: | complete |
-| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/Assignments/projects/ProjectileHeightandDistance|
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/projects/ProjectileHeightandDistance|
 | Notes: | Finished |
