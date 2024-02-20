@@ -39,6 +39,6 @@ ________________________________________________________________________________
 | Name: | Projectile Height and Distance Project |
 | Description: | "Projectile Height and Distance Project" |
 | Due Date: | 2/21/24 |
-| Status: | In-progress |
+| Status: | complete |
 | Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/projects/ProjectileHeightandDistance|
-| Notes: | Still working On this |
+| Notes: | Finished |
