@@ -26,10 +26,13 @@ int main(void)
 
 
 
+    cout << "Unit type: Feet or Meters? ";
 
-
-    cout << "Unit type: Feet or Meters? " << endl;
     cin >> unitType; // feet or meters? 
+
+
+    cout << setw(80) << setfill('=') << ' ' << endl;
+
     if (unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") 
     {
         cout << "What is the speed at which the projectile leaves the Cannon in Feet Per second? " << endl;
@@ -57,6 +60,8 @@ int main(void)
     cout << "What angle is the Cannon pointing at in Degrees? " << endl;
     cin >> alpha;
 
+    cout << setw(80) << setfill('=') << ' ' << endl;
+
      // Convert angle from degree to radians for calculation
     double angleRad = alpha * M_PI / 180.0; 
 
@@ -66,15 +71,21 @@ int main(void)
     double maxHeight = pow(muzzleVelocity * sin(angleRad), 2) / (2 * GRAVITY);
     double actualDistance = muzzleVelocity * cos(angleRad) * flightTime;
 
+    cout << setw(80) << setfill('=') << ' ' << endl;
+
     cout << "Flight Time: " << fixed << setprecision(2) <<  flightTime << " seconds "  << endl;
     cout << "Maximum height: " << fixed << setprecision(2) << maxHeight << " meters"  << endl; 
     cout << "Travelled Distance "  << fixed << setprecision(1) << actualDistance << " meters" << endl;
 
-    cout << "\n\n";
+    cout << setw(80) << setfill('=') << ' ' << endl;
+
+    cout << "\n";
+
+    cout << setw(80) << setfill('=') << ' ' << endl;
 
     if (actualDistance > targetDistance)
     {
-        cout << "Travelled Distance is more than target by " << actualDistance - targetDistance << " meters. Out of Range" << endl;;
+        cout << "Travelled Distance is more than target by " << actualDistance - targetDistance << " meters. " << endl << "Outside of Range" << endl;;
     } else if (actualDistance >= targetDistance - acceptedRange && actualDistance <= targetDistance + acceptedRange) 
     // if target = actual within +- 1 meter, return with "distance met"
     {
@@ -82,10 +93,12 @@ int main(void)
     }
     else
     {
-        cout << "Travelled Distance is less than target by " << targetDistance - actualDistance << " meters. Within range" << endl;
-        cout << "\n" << endl;
+        cout << "Travelled Distance is less than target by " << targetDistance - actualDistance << " meters." << endl << "Within range" << endl;
     }
-    
+
+    cout << setw(80) << setfill('=') << ' ' << endl;
+
+    cout << "\n" << endl;
     
     return 0;
 }
