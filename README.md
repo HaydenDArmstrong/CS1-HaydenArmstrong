@@ -40,6 +40,5 @@ ________________________________________________________________________________
 | Description: | "Projectile Height and Distance Project" |
 | Due Date: | 2/21/24 |
 | Status: | complete |
-| Location: |https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/ProjectileHeightandDistance
-|
+| Location: |https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/ProjectileHeightandDistance|
 | Notes: | Finished |
