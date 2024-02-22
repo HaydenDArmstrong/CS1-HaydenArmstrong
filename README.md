@@ -42,3 +42,13 @@ ________________________________________________________________________________
 | Status: | complete |
 | Location: |https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/ProjectileHeightandDistance|
 | Notes: | Finished |
+
+## Assignment #4
+| Name | Value |
+| --- | --- |
+| Name: | Shapes Lab |
+| Description: | "Shapes lab (Part of Loops Folder)" |
+| Due Date: | 2/23?/24 |
+| Status: | complete |
+| Location: |https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/loops/shapes|
+| Notes: | Finished. All shapes are correctly output and y/n loop works correctly |
