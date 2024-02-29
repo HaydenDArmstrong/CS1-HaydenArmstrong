@@ -1,3 +1,13 @@
+/*
+    Projectile Height and Distance Calculator
+    
+    Updated By: Hayden Armstrong
+    First Submission Date: 2/21/2024
+    REDONE: 2/29/2024
+    
+    *Changed so outputs to both feet and meters
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -42,7 +52,6 @@ int main(void)
 
         //unit conversion if given feet
         muzzleVelocity *= FeetToMeter;
-        targetDistance *= FeetToMeter;
     } 
     else if (unitType == "meters" || unitType == "meter" || unitType == "Meters" || unitType == "Meter")
     {
@@ -50,12 +59,15 @@ int main(void)
         cin >> muzzleVelocity;
         cout << "What is the horizontal target distance from the cannon in Meters? " << endl;
         cin >> targetDistance; 
+
+        
     }
     else // if given something else than feet/meter
     {
         cout << "Invalid Input. Program will now end." << endl;
         return 1;
     }
+
 
     cout << "What angle is the Cannon pointing at in Degrees? " << endl;
     cin >> alpha;
@@ -71,34 +83,78 @@ int main(void)
     double maxHeight = pow(muzzleVelocity * sin(angleRad), 2) / (2 * GRAVITY);
     double actualDistance = muzzleVelocity * cos(angleRad) * flightTime;
 
-    cout << setw(80) << setfill('=') << ' ' << endl;
 
-    cout << "Flight Time: " << fixed << setprecision(2) <<  flightTime << " seconds "  << endl;
-    cout << "Maximum height: " << fixed << setprecision(2) << maxHeight << " meters"  << endl; 
-    cout << "Travelled Distance "  << fixed << setprecision(1) << actualDistance << " meters" << endl;
+    //calculation results: feet and meter
 
-    cout << setw(80) << setfill('=') << ' ' << endl;
-
-    cout << "\n";
-
-    cout << setw(80) << setfill('=') << ' ' << endl;
-
-    if (actualDistance > targetDistance)
+    if (unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") 
+    //feet result
     {
-        cout << "Travelled Distance is more than target by " << actualDistance - targetDistance << " meters. " << endl << "Outside of Range" << endl;;
-    } else if (actualDistance >= targetDistance - acceptedRange && actualDistance <= targetDistance + acceptedRange) 
-    // if target = actual within +- 1 meter, return with "distance met"
+        double maxHeightFeet = maxHeight * MeterToFeet;
+        double actualDistanceFeet = actualDistance * MeterToFeet;
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "Flight Time: " << fixed << setprecision(2) <<  flightTime << " seconds "  << endl;
+        cout << "Maximum height: " << fixed << setprecision(2) << maxHeightFeet << " feet"  << endl; 
+        cout << "Travelled Distance "  << fixed << setprecision(1) << actualDistanceFeet << " feet" << endl;
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "\n";
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        if (actualDistanceFeet > targetDistance)
+        {
+            cout << "Travelled Distance is more than target by " << actualDistanceFeet - targetDistance << " feet. " << endl << "Outside of Range" << endl;;
+        }   
+        else if (actualDistanceFeet >= targetDistance - acceptedRange && actualDistanceFeet <= targetDistance + acceptedRange) 
+        // if target = actual within +- 1 feet, return with "distance met"
+        {
+            cout << "Target Distance Met!" << endl;
+        }
+        else
+        {
+            cout << "Travelled Distance is less than target by " << targetDistance - actualDistanceFeet << " feet." << endl << "Within range" << endl;
+        }
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "\n" << endl;
+    } 
+    else 
+    // meter result
     {
-        cout << "Target Distance Met!"; 
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "Flight Time: " << fixed << setprecision(2) <<  flightTime << " seconds "  << endl;
+        cout << "Maximum height: " << fixed << setprecision(2) << maxHeight << " meters"  << endl; 
+        cout << "Travelled Distance "  << fixed << setprecision(1) << actualDistance << " meters" << endl;
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "\n";
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        if (actualDistance > targetDistance)
+        {
+            cout << "Travelled Distance is more than target by " << actualDistance - targetDistance << " meters. " << endl << "Outside of Range" << endl;;
+        } 
+        else if (actualDistance >= targetDistance - acceptedRange && actualDistance <= targetDistance + acceptedRange) 
+            // if target = actual within +- 1 meter, return with "distance met"
+        {
+            cout << "Target Distance Met!" << endl;
+        }
+        else
+        {
+            cout << "Travelled Distance is less than target by " << targetDistance - actualDistance << " meters." << endl << "Within range" << endl;
+        }
+
+        cout << setw(80) << setfill('=') << ' ' << endl;
+
+        cout << "\n" << endl;
     }
-    else
-    {
-        cout << "Travelled Distance is less than target by " << targetDistance - actualDistance << " meters." << endl << "Within range" << endl;
-    }
-
-    cout << setw(80) << setfill('=') << ' ' << endl;
-
-    cout << "\n" << endl;
     
     return 0;
 }

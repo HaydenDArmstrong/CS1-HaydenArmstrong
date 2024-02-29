@@ -38,10 +38,10 @@ ________________________________________________________________________________
 | --- | --- |
 | Name: | Projectile Height and Distance Project |
 | Description: | "Projectile Height and Distance Project" |
-| Due Date: | 2/21/24 |
-| Status: | complete |
+| Due Date: | 2/21/24 (resubmitted 2/29/2024) |
+| Status: | complete (resubmit) |
 | Location: |https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/ProjectileHeightandDistance|
-| Notes: | Finished |
+| Notes: | Finished, updated so that it now outputs both feet and meter result |
 
 ## Assignment #4
 | Name | Value |
