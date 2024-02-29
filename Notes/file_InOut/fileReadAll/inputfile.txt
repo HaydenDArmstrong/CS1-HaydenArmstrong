@@ -1,0 +1,4 @@
+sample input file to be read
+1 2 3
+4 5 6
+7 8 9 10
