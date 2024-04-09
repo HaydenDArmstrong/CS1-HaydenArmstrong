@@ -1,154 +1,132 @@
 #include <iostream>
-#include <fstream>
-#include <cmath>
 #include <iomanip>
+#include <cmath>
 
-#ifndef M_PI
 #define M_PI 3.14159
-#endif
 
-const double g = 9.81; // Acceleration due to gravity (m/s^2)
-const double dt = 0.01; // Time step (s)
-const double airDensity = 1.225; // Air density at sea level (kg/m^3)
-const double radius = 0.1; // Radius of the projectile (m)
-const double area = M_PI * radius * radius; // Cross-sectional area (m^2)
-
-// Structure to hold projectile information
-struct Projectile {
-    double mass;
-    double radius;
-    double dragCoefficient;
-};
+// Constants
+const double GRAVITY = 9.81;
+const double MeterToFeet = 3.28;
+const double FeetToMeter = 1 / MeterToFeet;
+const double g = 9.81;
+const double dt = 0.01;
+const double airDensity = 1.225;
+const double dragCoefficient = 0.47;
+const double radius = 0.3;
+const double area = M_PI * radius * radius;
+const double mass = 3.0;
+const double acceptedRange = 1.0;
 
 // Function to calculate the acceleration due to air resistance
-void airResistance(double vx, double vy, double& ax, double& ay, const Projectile& projectile) {
-    double speed = std::sqrt(vx * vx + vy * vy);
-    double force = 0.5 * airDensity * projectile.dragCoefficient * area * speed * speed;
-    ax = -force / projectile.mass * (vx / speed);
-    ay = -force / projectile.mass * (vy / speed);
-}
-
-// Function to calculate projectile motion and print results
-void calculateProjectileMotion(double angle, double speed, char units, const Projectile& projectile) {
-    // Convert angle to radians
-    angle = angle * M_PI / 180;
-
-    // Convert speed to meters per second if units are feet per second
-    if (units == 'f') {
-        speed *= 0.3048; // Conversion factor from feet per second to meters per second
-    }
-
-    // Calculate initial velocity components
-    double vx = speed * std::cos(angle);
-    double vy = speed * std::sin(angle);
-
-    // Simulation loop
-    double x = 0, y = 0, time = 0, max_height = 0;
-    while (y >= 0) {
-        // Update position
-        x += vx * dt;
-        y += vy * dt;
-
-        // Calculate acceleration due to air resistance
-        double ax, ay;
-        airResistance(vx, vy, ax, ay, projectile);
-
-        // Update velocity
-        vx += ax * dt;
-        vy += (-g + ay) * dt; // Include gravity
-
-        // Update max_height
-        if (y > max_height) {
-            max_height = y;
-        }
-
-        // Increment time
-        time += dt;
-    }
-
-    // Output results
-    std::cout << "Flight time: " << std::fixed << std::setprecision(2) << time << " seconds\n";
-    std::cout << "Max height: " << std::fixed << std::setprecision(2) << max_height << " meters (" << max_height / 0.3048 << " feet)\n";
-    std::cout << "Distance: " << std::fixed << std::setprecision(1) << x << " meters (" << x / 0.3048 << " feet)\n";
-}
-
-// Function to generate a 2D array of distances versus angles and velocities
-void generateDistanceArray(double max_muzzle_velocity, int num_angles, int num_velocities, const Projectile& projectile, double** distances) {
-    // Define the step sizes for angles and velocities
-    double angle_step = 90.0 / num_angles;
-    double velocity_step = max_muzzle_velocity / num_velocities;
-
-    //angles
-    for (int i = 0; i < num_angles; ++i) {
-        double angle = i * angle_step;
-        // velocities
-        for (int j = 0; j < num_velocities; ++j) {
-            double velocity = j * velocity_step;
-            // Calculate distance for this angle and velocity
-            //double distance;
-            calculateProjectileMotion(angle, velocity, 'm', projectile); // Assuming units are always meters
-            // Store the distance in the array
-            // distances[i][j] = distance; // Implement this once distance calculation is done
-        }
-    }
-}
-
-// Function to output a 2D array to a text file
-void outputArrayToFile(double** array, int num_angles, int num_velocities, const char* filename) {
-    std::ofstream file(filename);
-    if (file.is_open()) {
-        for (int i = 0; i < num_angles; ++i) {
-            for (int j = 0; j < num_velocities; ++j) {
-                file << std::setw(10) << array[i][j] << " "; // Adjust the width as needed
-            }
-            file << "\n";
-        }
-        file.close();
-        std::cout << "Array has been written to the file: " << filename << std::endl;
-    } else {
-        std::cerr << "Unable to open file: " << filename << std::endl;
-    }
+void airResistance(double vx, double vy, double& ax, double& ay) {
+    double speedSquared = vx * vx + vy * vy;
+    double force = 0.5 * airDensity * dragCoefficient * area * speedSquared;
+    double speed = sqrt(speedSquared);
+    ax = -force / mass * (vx / speed);
+    ay = -force / mass * (vy / speed) - g;
 }
 
 int main() {
-    // Projectile information
-    Projectile projectile;
-    projectile.mass = 30.0; // Mass of the projectile (kg)
-    projectile.radius = 0.1; // Radius of the projectile (m)
-    projectile.dragCoefficient = 0.47; // Drag coefficient for a sphere
+    int choice;
+    std::cout << "Choose Mode: ";
+    std::cin >> choice;
+    std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
 
-    // Input parameters
-    double angle, speed;
-    char units;
-    std::cout << "Enter angle of launch (degrees): ";
-    std::cin >> angle;
-    std::cout << "Enter initial speed: ";
-    std::cin >> speed;
-    std::cout << "Enter units (meters 'm' or feet 'f'): ";
-    std::cin >> units;
+    switch (choice) {
+        case 1: { //OG case- output flight time, max height, travelled distance. probably delete later
+            double alpha, muzzleVelocity, targetDistance;
+            std::string unitType;
 
-    // Calculate projectile motion
-    calculateProjectileMotion(angle, speed, units, projectile);
+            std::cout << "Unit type: Feet or Meters? ";
+            std::cin >> unitType;
 
-    // Example usage for Mode 2
-    int num_angles = 10; // Number of angles
-    int num_velocities = 10; // Number of velocities
-    double max_muzzle_velocity = 100.0; // Maximum muzzle velocity
-    double** distances = new double*[num_angles];
-    for (int i = 0; i < num_angles; ++i) {
-        distances[i] = new double[num_velocities];
+            std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
+
+            if (unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") {
+                std::cout << "Speed at which the projectile leaves the Cannon in Feet Per second: ";
+                std::cin >> muzzleVelocity;
+                std::cout << "Horizontal target distance from the cannon in Feet: ";
+                std::cin >> targetDistance;
+                muzzleVelocity *= FeetToMeter;
+            } else if (unitType == "meters" || unitType == "meter" || unitType == "Meters" || unitType == "Meter") {
+                std::cout << "Speed at which the projectile leaves the Cannon in Meters Per second: ";
+                std::cin >> muzzleVelocity;
+                std::cout << "Horizontal target distance from the cannon in Meters: ";
+                std::cin >> targetDistance;
+            } else {
+                std::cout << "Invalid Input. Program will now end." << std::endl;
+                return 1;
+            }
+
+            std::cout << "Angle of the Cannon in Degrees: ";
+            std::cin >> alpha;
+            std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
+
+            double angleRad = alpha * M_PI / 180.0;
+
+            double flightTime = (2 * muzzleVelocity * sin(angleRad)) / GRAVITY;
+            double maxHeight = pow(muzzleVelocity * sin(angleRad), 2) / (2 * GRAVITY);
+            double actualDistance = pow(muzzleVelocity, 2) * sin(2 * angleRad) / GRAVITY;
+
+            double actualDistanceUnit = (unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") ? actualDistance * MeterToFeet : actualDistance;
+
+            std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
+            std::cout << "Flight Time: " << std::fixed << std::setprecision(2) << flightTime << " seconds" << std::endl;
+            std::cout << "Maximum height: " << std::fixed << std::setprecision(2) << maxHeight << " " << ((unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") ? "feet" : "meters") << std::endl;
+            std::cout << "Travelled Distance: " << std::fixed << std::setprecision(1) << actualDistanceUnit << " " << ((unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") ? "feet" : "meters") << std::endl;
+
+            std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
+
+            double distanceDiff = actualDistanceUnit - targetDistance;
+            if (std::abs(distanceDiff) <= acceptedRange) {
+                std::cout << "Target Distance Met!" << std::endl;
+            } else {
+                std::cout << "Travelled Distance is " << (distanceDiff > 0 ? "more" : "less") << " than target by " << std::abs(distanceDiff) << " " << ((unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") ? "feet" : "meters") << "." << std::endl;
+            }
+
+            std::cout << std::setw(80) << std::setfill('=') << ' ' << std::endl;
+            break;
+        }
+        case 2: { //Case where given Maximum muzzle velocity, and target distance, find optimal angle and velocity (future second case)
+            double maxMuzzleVelocity;
+            std::string unitType;
+            std::cout << "Unit type: Feet or Meters? ";
+            std::cin >> unitType;
+            if (unitType == "feet" || unitType == "foot" || unitType == "Feet" || unitType == "Foot") {
+                std::cout << "What is Maximum muzzle Velocity? ";
+                std::cin >> maxMuzzleVelocity;
+            } else if (unitType == "meters" || unitType == "meter" || unitType == "Meters" || unitType == "Meter") {
+                std::cout << "What is Maximum muzzle Velocity? ";
+                std::cin >> maxMuzzleVelocity;
+            } else {
+                std::cout << "Invalid Input" << std::endl;
+            }
+            break;
+        }
+        case 101: { //case  tracks position and time (future first case)
+            double x = 0, y = 0, max_height = 0, timeTrack = 0, vx, vy;
+            double angle = 45, speed = 100;
+            vx = speed * cos(angle * M_PI / 180);
+            vy = speed * sin(angle * M_PI / 180);
+            while (y >= 0) {
+                x += vx * dt;
+                y += vy * dt;
+                double ax, ay;
+                airResistance(vx, vy, ax, ay);
+                vx += ax * dt;
+                vy += ay * dt;
+                std::cout << "Position: (" << x << ", " << y << "), Time: " << timeTrack << std::endl;
+                timeTrack += dt;
+                if (y > max_height) {
+                    max_height = y;
+                }
+            }
+            std::cout << "Max height: " << max_height << std::endl;
+            break;
+        }
+        default:
+            std::cout << "Invalid Choice. Program will now end." << std::endl;
+            return 1;
     }
-    generateDistanceArray(max_muzzle_velocity, num_angles, num_velocities, projectile, distances);
-
-    // Example usage for Mode 3
-    // Output the array to a text file
-    outputArrayToFile(distances, num_angles, num_velocities, "distance_array.txt");
-
-    // Free memory
-    for (int i = 0; i < num_angles; ++i) {
-        delete[] distances[i];
-    }
-    delete[] distances;
-
     return 0;
 }

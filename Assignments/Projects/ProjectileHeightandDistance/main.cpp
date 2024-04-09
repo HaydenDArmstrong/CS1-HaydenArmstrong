@@ -81,7 +81,7 @@ int main(void)
 
     double flightTime = (2 * muzzleVelocity * sin(angleRad)) / GRAVITY;
     double maxHeight = pow(muzzleVelocity * sin(angleRad), 2) / (2 * GRAVITY);
-    double actualDistance = muzzleVelocity * cos(angleRad) * flightTime;
+    double actualDistance = pow(muzzleVelocity, 2) * sin(2*angleRad) / GRAVITY;
 
 
     //calculation results: feet and meter
