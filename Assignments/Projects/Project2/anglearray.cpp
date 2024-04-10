@@ -11,14 +11,19 @@ const double GRAVITY = 9.81;
 int main() {
     const int numAngles = 10; // Number of angles (0 to 90)
     const int numVelocities = 10; // Number of muzzle velocities (0 to maxMuzzleVelocity)
-    const double maxMuzzleVelocity = 450.0; //set 450 for example. FUTURE VARIABLE FROM USER INPUT
+
+
+    double maxMuzzleVelocity = 0;
+    std::cout << "What is maximum muzzle velocity?" << std::endl;
+    std::cin >> maxMuzzleVelocity;
+
     double distances[numAngles][numVelocities]; // Array to store distances
 
     // Populate the distances array
     for (int angle = 0; angle <= 90; angle += 10) {
         double angleRad = angle * M_PI / 180.0; // Convert angle to radians
-        for (int velocity = 0; velocity <= numVelocities; ++velocity) {
-            double muzzleVelocity = velocity * maxMuzzleVelocity / numVelocities;
+        for (int velocity = 0; velocity < numVelocities; ++velocity) {
+            double muzzleVelocity = velocity * maxMuzzleVelocity / (numVelocities - 1);
             distances[angle / 10][velocity] = pow(muzzleVelocity, 2) * sin(2 * angleRad) / GRAVITY;
         }
     }
@@ -32,8 +37,8 @@ int main() {
 
     // Write column headers (velocity)
     outputFile << std::setw(10) << "Angle(deg)";
-    for (int velocity = 0; velocity <= numVelocities; ++velocity) {
-        outputFile << std::setw(10) << (velocity * maxMuzzleVelocity / numVelocities) << " m/s";
+    for (int velocity = 0; velocity < numVelocities; ++velocity) {
+        outputFile << std::setw(15) << (velocity * maxMuzzleVelocity / (numVelocities - 1)) << " m/s";
     }
     outputFile << std::endl;
 
@@ -43,8 +48,8 @@ int main() {
         outputFile << std::setw(10) << angle << " deg";
 
         // Write distance values for each angle
-        for (int velocity = 0; velocity <= numVelocities; ++velocity) {
-            outputFile << std::setw(10) << std::fixed << std::setprecision(2) << distances[angle / 10][velocity];
+        for (int velocity = 0; velocity < numVelocities; ++velocity) {
+            outputFile << std::setw(15) << std::fixed << std::setprecision(2) << distances[angle / 10][velocity];
         }
         outputFile << std::endl;
     }

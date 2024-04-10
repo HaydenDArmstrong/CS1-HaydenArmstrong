@@ -50,16 +50,38 @@ int main() {
 
     //ask to choose use case
     int choice;
-    std::cout << "Choose Mode: ";
+    std::cout << "Choose Mode: "<< std::endl;
+    std::cout << "1: Flight time, Max Height, and Distance Calculator"<< std::endl;
+    std::cout << "2: Target distance Input, Angle/velocity Output "<< std::endl;
+    std::cout << "3: Distance table given Max Muzzle velocity "<< std::endl;
+    std::cout << "Which mode would you like to select? ";
     std::cin >> choice;
 
     switch (choice) { //use case that tracks current xy position relative to time
         case 1: { 
     double x = 0, y = 0, time=0, ax=0, ay=0, max_height = 0; // Initial position (m)
-    double angle = 45; // Launch angle (degrees)
-    double speed = 50; // Initial speed (m/s)
+    double angle = 0; // Launch angle (degrees)
+    double speed = 0; // Initial speed (m/s)
+
+    std::string unit;
+    std::cout << "Enter 'feet' or 'meters' for unit of measurement: ";
+    std::cin >> unit;
+
+    std::cout << "Angle: ";
+    std::cin >> angle;
+    std::cout << "Speed: ";
+    std::cin >> speed;
+
+    if (unit == "feet") {
+        speed *= 0.3048; // Convert speed to meters per second
+    }
+
     double vx = speed * std::cos(angle * M_PI / 180);
     double vy = speed * std::sin(angle * M_PI / 180);
+
+    double finalDistance;
+    double timeTotal;
+
 
     int step_num=0;
     // Simulation loop
@@ -95,13 +117,24 @@ int main() {
         {
             max_height = y;
         }
+        if(x > finalDistance)
+        {
+            finalDistance = x;
+        }
+        if(time > timeTotal)
+        {
+            timeTotal = time;
+        }
 
         // Break if the projectile hits the ground
         if (y < 0) break;
 
     }  // End while
+    std::cout << std::endl;
     std::cout << "Max height: " << max_height << std::endl;
-    std::cout << area << std::endl;
+    std::cout << "Final Distance travelled: " << finalDistance << std::endl;
+    std::cout << "Total time spent travelling: " << timeTotal << std::endl;
+    //std::cout << area << std::endl;
             break;
         }
         case 2: {
