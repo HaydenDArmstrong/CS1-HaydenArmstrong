@@ -70,5 +70,5 @@ ________________________________________________________________________________
 | Description: | "Project 2" |
 | Due Date: | 4/16/24 |
 | Status: | mostly complete |
-| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/projects/project2|
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/Project2|
 | Notes: | Functions Correctly, im still trying to fix some aspects of the code and make it more efficent |
