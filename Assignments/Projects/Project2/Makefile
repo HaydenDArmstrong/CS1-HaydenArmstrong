@@ -2,7 +2,7 @@
 CXX = clang++
 PROGRAM = main.exe
 FLAGS = -c -g -Wall -std=c++17 -pedantic
-CPPFILES = fakemain.cpp
+CPPFILES = main.cpp
 
 all:
 	$(CXX) $(FLAGS) $(CPPFILES)

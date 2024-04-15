@@ -62,3 +62,13 @@ ________________________________________________________________________________
 | Status: | complete |
 | Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/modulo|
 | Notes: | Functions Correctly |
+
+## Assignment #6
+| Name | Value |
+| --- | --- |
+| Name: | Project 2 |
+| Description: | "Project 2" |
+| Due Date: | 4/16/24 |
+| Status: | mostly complete |
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/projects/project2|
+| Notes: | Functions Correctly, im still trying to fix some aspects of the code and make it more efficent |
