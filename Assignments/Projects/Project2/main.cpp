@@ -194,7 +194,7 @@ int main() {
                 break;
             }
             case 3: {
-                const int numAngles = 15; // Number of angles (0 to 90)
+                const int numAngles = 90; // Number of angles (0 to 90)
                 const int numVelocities = 30; // Number of muzzle velocities (0 to maxMuzzleVelocity)
 
                 double maxMuzzleVelocity;
