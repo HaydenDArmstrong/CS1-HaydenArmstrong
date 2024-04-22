@@ -1,4 +1,4 @@
-# CS1-HaydenArmstorng
+# CS1-HaydenArmstrong
 
 | Basic Info | --- |
 | --- | ---|
@@ -72,3 +72,23 @@ ________________________________________________________________________________
 | Status: | mostly complete |
 | Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/Project2|
 | Notes: | Functions Correctly, im still trying to fix some aspects of the code and make it more efficent |
+
+## Assignment #7
+| Name | Value |
+| --- | --- |
+| Name: | File io lab part A |
+| Description: | "File io lab part A" |
+| Due Date: | 4/18/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/fileio|
+| Notes: | Functions Correctly |
+
+## Assignment #6
+| Name | Value |
+| --- | --- |
+| Name: | File io lab part B |
+| Description: | "File io lab part B - Binary file io" |
+| Due Date: | 4/19/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/labs/fileio_binary|
+| Notes: | Functions Correctly |
