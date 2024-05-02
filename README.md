@@ -90,5 +90,15 @@ ________________________________________________________________________________
 | Description: | "File io lab part B - Binary file io" |
 | Due Date: | 4/19/24 |
 | Status: | complete |
-| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/labs/fileio_binary|
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/labs/fileio_binary|
+| Notes: | Functions Correctly |
+
+## Assignment #7
+| Name | Value |
+| --- | --- |
+| Name: | Final Project|
+| Description: | "Final Project- Hangman" |
+| Due Date: | 5/2/24 |
+| Status: | complete |
+| Location: | https://github.com/HaydenDArmstrong/CS1-HaydenArmstrong/tree/main/Assignments/Projects/FinalProject|
 | Notes: | Functions Correctly |
