@@ -9,6 +9,7 @@ hangman.h is the file where functions are declared, hangman.cpp are the implemnt
 main.cpp is where the main logic is for the game. 
 
 */
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -18,8 +19,8 @@ main.cpp is where the main logic is for the game.
 using namespace std;
 
 void startGame(Difficulty difficulty, const vector<string>& words) {
-    // Adjust game parameters based on difficulty
-    int maxTries;
+    // Adjust game based on difficulty
+    int maxTries = 0; // Initialization of maxTries
     switch (difficulty) {
         case Difficulty::EASY:
             maxTries = 8;
@@ -37,95 +38,78 @@ void startGame(Difficulty difficulty, const vector<string>& words) {
     // Initialize variables
     char letter;
     bool guessedWord = false;
-    bool playAgain = true;
 
     srand(time(0));
 
-    while (playAgain) {
-        
-        // Select a random word from vector
-        string selectedWord = getRandomWord(words);
+    // Select a random word from vector
+    string selectedWord = getRandomWord(words);
 
-        // Initialize
-        int wrongGuesses = 0;
-        string guessedLetters;
-        string hiddenWord(selectedWord.length(), '_');
+    // Initialize
+    int wrongGuesses = 0;
+    string guessedLetters;
+    string hiddenWord(selectedWord.length(), '_');
 
-        cout << "Welcome to Hangman! Try to guess the word.\n";
+    cout << "Welcome to Hangman! Try to guess the word.\n";
 
-        // Main game loop
-        while (wrongGuesses < maxTries && !guessedWord) {
-            displayHangman(wrongGuesses);
-            displayWord(hiddenWord);
+    // Main game loop
+    while (wrongGuesses < maxTries && !guessedWord) {
+        displayHangman(wrongGuesses);
+        displayWord(hiddenWord);
+        cout << "Incorrect letters guessed: " << guessedLetters << endl;
+        cout << "Guesses remaining: " << maxTries - wrongGuesses << endl;
 
-            cout << "Enter a letter: ";
-            cin >> letter;
+        cout << "Enter a letter: ";
+        cin >> letter;
 
-            // Check if the letter has already been guessed
-            if (guessedLetters.find(letter) != string::npos) {
-                cout << "You've already guessed that letter. Try again.\n";
-                continue;
-            }
-
-            // Check if the letter is in the word
-            if (updateWord(selectedWord, hiddenWord, letter)) {
-                cout << "Correct!\n";
-            } else {
-                cout << "Incorrect guess.\n";
-                ++wrongGuesses;
-            }
-
-            // Add guessed letter to list
-            guessedLetters += letter;
-
-            // Check if the word has been guessed
-            if (selectedWord == hiddenWord) {
-                guessedWord = true;
-                break;
-            }
+        // Check if the letter has already been guessed
+        if (guessedLetters.find(letter) != string::npos) {
+            cout << "You've already guessed that letter. Try again.\n";
+            continue;
         }
 
-        // Display outcome of game
-        if (guessedWord) {
-            cout << "Congratulations! You guessed the word: " << selectedWord << endl;
+        // Check if the letter is in the word
+        if (updateWord(selectedWord, hiddenWord, letter)) {
+            cout << "Correct!\n";
         } else {
-            cout << "Ouch! You ran out of tries. The word was: " << selectedWord << endl;
+
+            ++wrongGuesses;
+            guessedLetters += letter; // Add incorrect letter to list
         }
 
-            // Ask player if they want to play again
-        char choice;
-        cout << "Do you want to play again? (y/n): ";
-        cin >> choice;
-
-        if (choice != 'y' && choice != 'Y') {
-            playAgain = false;
+        // Check if the word has been guessed
+        if (selectedWord == hiddenWord) {
+            guessedWord = true;
+            break;
         }
-
-        // Reset variables for new game
-        guessedWord = false;
-        guessedLetters.clear();
-        }
-
-        
-
     }
+
+    // Display outcome of game
+    if (guessedWord) {
+        cout << "Congratulations! You guessed the word: " << selectedWord << endl;
+    } else {
+        cout << "Ouch! You ran out of tries. The word was: " << selectedWord << endl;
+    }
+}
 
 int main() {
     // Read words from file into vector
     vector<string> words;
-    
-    // Main game loop
-    // Display menu to select difficulty
-    cout << "Select difficulty:\n";
-            cout << "1. Easy\n";
-            cout << "2. Medium\n";
-            cout << "3. Hard\n";
-            cout << "4. Explanation\n";
-            int choice;
-            cin >> choice;
+
+    char playAgainChoice = 'y'; // Initialize playAgainChoice
+
+    while (playAgainChoice == 'y' || playAgainChoice == 'Y') {
+        // Display menu to select difficulty
+        cout << "Select difficulty:\n";
+        cout << "1. Easy\n";
+        cout << "2. Medium\n";
+        cout << "3. Hard\n";
+        cout << "4. Explanation\n";
+        int choice;
+        cin >> choice;
 
         Difficulty difficulty;
         switch (choice) {
+            //chooses which word file and difficulty to activate based on user answer
             case 1:
                 difficulty = Difficulty::EASY;
                 words = readWordsFromFile("words_easy.txt");
@@ -142,12 +126,13 @@ int main() {
                 difficulty = Difficulty::HELP;
                 cout << "Explanation:\n";
                 cout << "The objective of hangman is to guess the secret word before the stick figure is hung.\n";
-                cout << "When all parts of the stick figure are hung, the game is over.\n";
-                cout << "There are usually 6 incorrect guesses (head, body, 2 arms, 2 legs), but this will change with difficulty.\n";
+                cout << "When all parts of the stick figure are hung, the game is over.\n\n";
+                cout << "There are usually 6 incorrect guesses (head, body, 2 arms, 2 legs), but this will change with difficulty.\n\n";
                 cout << "Easy: Short words, more common letters. 8 tries before ending\n";
                 cout << "Medium: Moderate length words, some common letters. 6 tries before ending\n";
-                cout << "Hard: Longer words, fewer common letters. 4 tries before ending \n";
-                break; // Don't start the game, let the loop repeat
+                cout << "Hard: Longer words, fewer common letters. 4 tries before ending \n\n";
+                break;
+
             default:
                 cout << "Invalid choice. Defaulting to Medium difficulty.\n";
                 difficulty = Difficulty::MEDIUM;
@@ -155,9 +140,15 @@ int main() {
                 break;
         }
 
-        startGame(difficulty, words);
+        if (choice != 4) { // Start the game only if not showing explanation
+            startGame(difficulty, words);
+        }
+
+        //once game is over, or if explanation is chosen, ask if want to play again
+
+        cout << "Do you wish to play again? (y/n): ";
+        cin >> playAgainChoice;
+    }
 
     return 0;
-
 }
-

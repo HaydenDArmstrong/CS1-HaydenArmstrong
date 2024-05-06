@@ -28,7 +28,15 @@ std::string getRandomWord(const std::vector<std::string>& words) {
 }
 
 void displayHangman(int wrongGuesses) {
-    // ASCII art representation of Hangman
+
+    #ifdef _WIN32
+        system("cls"); // For Windows
+    #else
+        system("clear"); // For Unix/Linux
+    #endif
+    
+
+    // ASCII art representation of Hangman. Added case 7 and 8 for higher difficulties
     switch (wrongGuesses) {
         case 0:
             std::cout << "  +---+\n";
