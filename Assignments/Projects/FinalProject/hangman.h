@@ -6,6 +6,12 @@
 
 enum class Difficulty { EASY, MEDIUM, HARD, HELP };
 
+//external variables to track wins, number of games, and win/loss ratio (wins divided by total number of games)
+extern int wins;
+extern int games;
+extern double wlratio;
+
+
 std::vector<std::string> readWordsFromFile(const std::string& filename);
 std::string getRandomWord(const std::vector<std::string>& words);
 void displayHangman(int wrongGuesses);

@@ -14,11 +14,13 @@ main.cpp is where the main logic is for the game.
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 #include "hangman.h"
+
 
 using namespace std;
 
-void startGame(Difficulty difficulty, const vector<string>& words) {
+void startGame(Difficulty difficulty, const vector<string>& words, int& wins, int& games, double& wlratio) {
     // Adjust game based on difficulty
     int maxTries = 0; // Initialization of maxTries
     switch (difficulty) {
@@ -61,6 +63,15 @@ void startGame(Difficulty difficulty, const vector<string>& words) {
         cout << "Enter a letter: ";
         cin >> letter;
 
+        // Check if the input is an alphabetic character
+    if (!isalpha(letter)) {
+        cout << "Invalid input! Please enter an alphabetic character.\n";
+       continue; // Restart the loop to prompt for a valid input
+    }
+
+    // Convert input to lowercase to match the word files
+    letter = tolower(letter);
+
         // Check if the letter has already been guessed
         if (guessedLetters.find(letter) != string::npos) {
             cout << "You've already guessed that letter. Try again.\n";
@@ -86,14 +97,28 @@ void startGame(Difficulty difficulty, const vector<string>& words) {
     // Display outcome of game
     if (guessedWord) {
         cout << "Congratulations! You guessed the word: " << selectedWord << endl;
+        ++wins;
     } else {
         cout << "Ouch! You ran out of tries. The word was: " << selectedWord << endl;
+    }
+    ++games;
+    if (games > 0) {
+        wlratio = static_cast<double>(wins) / games;
+    } else {
+        wlratio = 0.0; // Avoid division by zero
     }
 }
 
 int main() {
     // Read words from file into vector
     vector<string> words;
+
+    //initalize external ints that we use to track wins and total games player
+    int wins = 0;
+    int games = 0;
+    double wlratio = 0.0;
+
+
 
     char playAgainChoice = 'y'; // Initialize playAgainChoice
 
@@ -140,11 +165,18 @@ int main() {
                 break;
         }
 
-        if (choice != 4) { // Start the game only if not showing explanation
-            startGame(difficulty, words);
+        if (choice != 4) { 
+            // Start the game only if not showing explanation
+            startGame(difficulty, words, wins, games, wlratio);
         }
 
-        //once game is over, or if explanation is chosen, ask if want to play again
+        // Display total number of wins
+        cout << "Total wins: " << wins << endl;
+        cout << "Total Games Played: " << games << endl;
+
+        cout << setprecision(2) << "Win/Loss Ratio: " << wlratio << endl;
+
+        //once game is over, ask if want to play again
 
         cout << "Do you wish to play again? (y/n): ";
         cin >> playAgainChoice;
