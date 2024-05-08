@@ -38,89 +38,126 @@ void displayHangman(int wrongGuesses) {
 
     // ASCII art representation of Hangman. Added case 7 and 8 for higher difficulties
     switch (wrongGuesses) {
-        case 0:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 1:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 2:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << "  |   |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 3:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|   |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 4:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|\\  |\n";
-            std::cout << "      |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 5:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|\\  |\n";
-            std::cout << " /    |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 6:
-            std::cout << "  +---+\n";
-            std::cout << "  |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|\\  |\n";
-            std::cout << " / \\  |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 7:
-            std::cout << "  +---+\n";
-            std::cout << "* |   |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|\\  |\n";
-            std::cout << " / \\  |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        case 8:
-            std::cout << "  +---+\n";
-            std::cout << "* | * |\n";
-            std::cout << "  O   |\n";
-            std::cout << " /|\\ |\n";
-            std::cout << " / \\  |\n";
-            std::cout << "      |\n";
-            std::cout << "=========\n";
-            break;
-        
-    }
+    case 0: //intial
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     \n";
+        std::cout << "      |    \n";
+        std::cout << "      |     \n";
+        std::cout << "      |    \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 1: //head
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     @\n";
+        std::cout << "      |    \n";
+        std::cout << "      |     \n";
+        std::cout << "      |    \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 2: //neck
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     @\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |    \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 3: //first arm
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     @\n";
+        std::cout << "      |    /| \n";
+        std::cout << "      |     |\n";
+        std::cout << "      |    \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 4: //second arm (dead on hard)
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     @\n";
+        std::cout << "      |    /|\\\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |    \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 5://first leg
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |     @\n";
+        std::cout << "      |    /|\\\n";
+        std::cout << "      |     |\n";
+        std::cout << "      |    /  \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+    case 6://last leg (dead on normal mode)
+        std::cout << "       -------\n";
+        std::cout << "      |     |  \n";
+        std::cout << "      |     X  \n";
+        std::cout << "      |    /|\\ \n";
+        std::cout << "      |     |   \n";
+        std::cout << "      |    / \\ \n";
+        std::cout << " _____|__________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+
+        case 7:// stars for difficulties below medium
+        std::cout << "       -------\n";
+        std::cout << "      |     |\n";
+        std::cout << "      | *   X  \n";
+        std::cout << "      |    /|\\ \n";
+        std::cout << "      |     | \n";
+        std::cout << "      |    / \\ \n";
+        std::cout << " _____|_________\n";
+        std::cout << "/     |         /|\n";
+        std::cout << "______________ / /\n";
+        std::cout << "              | /\n";
+        std::cout << "______________|/ \n";
+        break;
+
+        case 8://extra stars
+    std::cout << "       -------\n";
+    std::cout << "      |     |\n";
+    std::cout << "      | **  X\n";
+    std::cout << "      |    /|\\\n";
+    std::cout << "      |     |\n";
+    std::cout << "      |    / \\\n";
+    std::cout << " _____|_________\n";
+    std::cout << "/     |         / |\n";
+    std::cout << "______________ / /\n";
+    std::cout << "              | /\n";
+    std::cout << "______________|/ \n";
+    break;
+}
 }
 
 

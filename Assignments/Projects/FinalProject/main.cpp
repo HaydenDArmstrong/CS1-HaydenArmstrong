@@ -57,7 +57,15 @@ void startGame(Difficulty difficulty, const vector<string>& words, int& wins, in
     while (wrongGuesses < maxTries && !guessedWord) {
         displayHangman(wrongGuesses);
         displayWord(hiddenWord);
-        cout << "Incorrect letters guessed: " << guessedLetters << endl;
+        cout << "Incorrect letters guessed: ";
+        for (int i = 0; i < guessedLetters.size(); ++i) {
+            cout << guessedLetters[i];
+            // Print comma and space if it's not the last character
+            if (i < guessedLetters.size() - 1) {
+                cout << ", ";
+            }
+        }
+cout << endl;
         cout << "Guesses remaining: " << maxTries - wrongGuesses << endl;
 
         cout << "Enter a letter: ";
@@ -72,11 +80,11 @@ void startGame(Difficulty difficulty, const vector<string>& words, int& wins, in
     // Convert input to lowercase to match the word files
     letter = tolower(letter);
 
-        // Check if the letter has already been guessed
-        if (guessedLetters.find(letter) != string::npos) {
-            cout << "You've already guessed that letter. Try again.\n";
-            continue;
-        }
+        // Check if the letter has already been guessed. doesnt currently working because of the hangman screen refresh loop
+        //if (guessedLetters.find(letter) != string::npos) {
+        //    cout << "You've already guessed that letter. Try again.\n";
+        //    continue;
+        //}
 
         // Check if the letter is in the word
         if (updateWord(selectedWord, hiddenWord, letter)) {
@@ -99,6 +107,7 @@ void startGame(Difficulty difficulty, const vector<string>& words, int& wins, in
         cout << "Congratulations! You guessed the word: " << selectedWord << endl;
         ++wins;
     } else {
+        displayHangman(wrongGuesses);
         cout << "Ouch! You ran out of tries. The word was: " << selectedWord << endl;
     }
     ++games;
